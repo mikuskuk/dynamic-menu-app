@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+
+    <nav class="bg-blue-500 p-4 text-white">
+        <a href="/menu1" class="hover:underline">Menu 1</a> | 
+        <a href="/menu2" class="hover:underline">Menu 2</a>
+    </nav>
+
+    <div class="container mx-auto mt-8 p-4 bg-white rounded shadow-lg">
+        <h1 class="text-2xl font-semibold mb-4">Dynamic Content</h1>
+        <div id="dynamic-content"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $("a[href='/menu1']").click(function(e) {
+                e.preventDefault();
+
+                $.ajax({
+                    url: '/menu1',
+                    method: 'GET',
+                    success: function(data) {
+                        $('#dynamic-content').html(data); 
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            });
+
+            $("a[href='/menu2']").click(function(e) {
+                e.preventDefault(); 
+
+                $.ajax({
+                    url: '/menu2',
+                    method: 'GET',
+                    success: function(data) {
+                        $('#dynamic-content').html(data); 
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
